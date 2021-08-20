@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Insertion Sort Algorithm Animation</title>
+      <!-- bootstrap Imports Start-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <!-- bootstrap Imports End-->
+      <link href="../styles/main.css" type="text/css" rel="stylesheet">
+      <script>
+         $(document).ready(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+             $('[data-toggle="popover"]').popover();
+         });
+      </script>
+      <script>
+         function showNavbarContent(id) {
+             try {
+                 var sorting = document.getElementById('navSortingAlgorithms');
+                 var specials = document.getElementById('navSpecials');
+
+                 if (sorting.id !== id)
+                     sorting.classList.remove("in");
+                 if (specials.id !== id)
+                     specials.classList.remove("in");
+
+             } catch (error) {
+
+             }
+         }
+      </script>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+         <a class="navbar-brand" href="#">TECKNO ALGORITHIMS</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href="../index.html">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="bubblesort.html">Bubble Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="insertionSort.html">Insertion Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="selectionsort.html">Selection Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="quickSort.html">Quick Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="binarySearch.html">Binary Search</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="linearSearch.html">Linear Search</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="row">
+         <div class="col-12 col-sm-12" style="text-align: center;  color:white">
+            <br><br><br>
+            <p id="buttons" class="text-center">
+               <input id="inputField" type="number" onkeydown="if (event.keyCode == 13) add()" min="1" max="99" step="1" value="1" size="10" maxlength="2">
+               <a class="btn btn-primary" role="button" id="add" onclick="add()" class="button2">Add</a>
+               <a class="btn btn-primary" role="button"  id="random" onclick="addRandom()" class="button2" >Add 10 Random Keys</a>
+               <a class="btn btn-primary" role="button"  id="sort" onclick="initSort(); startStopwatch()" class="button2" >Sort</a>
+               <a class="btn btn-primary" role="button"  id="fast" onclick="initFastSort(); startStopwatch()" class="button2 " >Sort 100 Keys Fast</a>
+               <a class="btn btn-primary" role="button" id="fast" data-toggle="modal" data-target=".bd-example-modal-lg" class="button2 ">Explanation</a>
+            </p>
+            <p id="buttons2" class="text-center">
+               <a class="btn btn-primary" role="button" id="pp" onclick="pausePlay(); startStopwatch()"  class="button">Pause/Play</a>
+               <a class="btn btn-primary" role="button" id="stop" onclick="stopButton(); resetStopwatch()" class="button3">Stop</a>
+            </p>
+
+            <div class="mx-auto card dell-blue text-white" id="timer-display" style="width: 14rem; color: black; visibility: hidden">
+               <h1 id="timer"></h1>
+            </div>
+
+            <canvas class="canvas-sorting" id="paint" width="1108" height="500">
+               Your browser does not support the HTML5 canvas tag.
+            </canvas>
+         </div>
+         <div class="w-100 d-none d-md-block"></div>
+         <div class="col-12 col-sm-12">
+            <h1>Code Sample</h1>
+            <iframe src="https://trinket.io/embed/python/74327d9946" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+         </div>
+      </div>
+      <!-- Large modal -->
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <h1>Insertion Sort Algorithim</h1>
+               <p>Insertion sort iterates through items which are already sorted in a list to determine where to insert new items. The first part of an insertion sort list is a sorted sub-list, with the rest of the list remaining unsorted. Insertion sort iterates through the unsorted list, until the whole list has been sorted.</p>
+               <h4>Example:</h4>
+               <h6>First Pass:</h6>
+               <p>( 9 7 5 2 12 8 ) –> ( 9 7 5 2 12 8 ), For this first pass nothing is changed as the algorithm begins comparing at positon 1 instead of position 0. The element at position 0 is the sorted list while the other elements make up the unsorted list.</p>
+               <h6>Second Pass:</h6>
+               <p>( 9 7 5 2 12 8 ) –> ( 7 9 5 2 12 8 ), In this second pass, the algorithm checks if the element at position 1 is less than any elements in the sorted list and if so, it shifts the appropriate elements in the sorted list to the right and then inserts the element it was previously comparing.</p>
+               <h6>Third Pass:</h6>
+               <p>( 7 9 5 2 12 8 ) –> ( 5 7 9 2 12 8 ), This action is repeated for element 5 as it is less than both element 7 and element 9, so the algorithm shifts them botht to the right and inserts element 5 into position 0.</p>
+               <h6>Fourth Pass:</h6>
+               <p>( 5 7 9 2 12 8 ) –> ( 2 5 7 9 12 8 ), Element 2 is inserted into position 1.</p>
+               <h6>Fifth Pass:</h6>
+               <p>( 2 5 7 9 12 8 ) –> ( 2 5 7 9 12 8 ), Since element 12 is less than each element in the sorted list, the list order is not changed and the element remains in it's position.</p>
+               <h6>Sixth Pass:</h6>
+               <p>( 2 5 7 9 12 8 ) –> ( 2 5 7 9 8 12 ), Similar to before, element 8 is compared against the elements in the sorted list and is inserted between elements 9 and 12. The list is then fully sorted.</p>
+            </div>
+         </div>
+      </div>
+      <script src="../Scripts/Sorting/insertionScript.js"></script>
+      <script src="../Scripts/timer.js"></script>
+      </div>
+   </body>
+</html>

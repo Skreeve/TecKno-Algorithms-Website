@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Binary Search Algorithm Animation</title>
+      <!-- bootstrap Imports Start-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="../Scripts/Searching/AddOn/jquery-1.7.2.min.js"></script>
+      <script src="../Scripts/Searching/AddOn/jquery-ui.min.js"></script>
+      <script src="../Scripts/Searching/AddOn/jquery.ui.touch-punch.min.js"></script>
+      <script src="../Scripts/Searching/AddOn/js.js"></script>
+      <script src="../Scripts/Searching/AddOn/jquery-1.7.2.min-1.js"></script>
+      <script src="../Scripts/Searching/AddOn/jquery-ui.min-1.js"></script>
+      <script src="../Scripts/Searching/AddOn/jquery.ui.touch-punch.min-1.js"></script>
+      <script type="text/javascript" src="../Scripts/Searching/AddOn/GetElementPosition-1.js"></script>
+      <script src="../Scripts/Searching/binaryScript.js"></script>
+      <!-- bootstrap Imports End-->
+      <link href="../styles/main.css" type="text/css" rel="stylesheet">
+      <script>
+         $(document).ready(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+             $('[data-toggle="popover"]').popover();
+         });
+      </script>
+      <script>
+         function showNavbarContent(id) {
+             try {
+                 var sorting = document.getElementById('navSortingAlgorithms');
+                 var specials = document.getElementById('navSpecials');
+
+                 if (sorting.id !== id)
+                     sorting.classList.remove("in");
+                 if (specials.id !== id)
+                     specials.classList.remove("in");
+
+             } catch (error) {
+
+             }
+         }
+      </script>
+   </head>
+   <body onLoad="init()">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+         <a class="navbar-brand" href="#">TECKNO ALGORITHIMS</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href="../index.html">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="bubblesort.html">Bubble Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="insertionSort.html">Insertion Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="selectionsort.html">Selection Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="quickSort.html">Quick Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="binarySearch.html">Binary Search</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="linearSearch.html">Linear Search</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="row">
+         <div class="col-12 col-sm-12" style="text-align: center;  color:white">
+            <br><br><br>
+            <p id="buttons" class="text-center">
+               Key: <input type="text" size="5" value="8" id="value" style="text-align: right">
+               <a class="btn btn-primary" role="button" id="step" class="button2" onclick="step()">Step</a>
+               <a class="btn btn-primary" role="button" id="reset" class="button2" onclick="reset()">Reset</a>
+               <a class="btn btn-primary" role="button" id="fast" data-toggle="modal" data-target=".bd-example-modal-lg" class="button2 ">Explanation</a>
+            </p>
+         </div>
+         <div class="w-100 d-none d-md-block"></div>
+         <div>
+            <!-- Usage: Enter a key as a number. Click the Step button to perform one comparison. Click the Reset button to start over with a new random list of integers. You may enter a new key for a new search. -->
+         </div>
+         <div style="height: 70px; font-size: 200%"></div>
+         <div id="lowValue" style="position: absolute; font-size: 70%;">low: 0</div>
+         <div id="lowPosition" style="position: absolute; font-size: 140%">&#8595;</div>
+         <div id="midValue" style="position: absolute; font-size: 70%;">mid: 1</div>
+         <div id="midPosition" style="position: absolute; font-size: 200%">&#8595;</div>
+         <div id="highValue" style="position: absolute; font-size: 70%;">high: 1</div>
+         <div id="highPosition" style="position: absolute; font-size: 230%">&#8595;</div>
+         <div style="display: table; overflow: hidden; width: 90%; margin: 0 auto;">
+            <script>
+               SIZE = 16;
+               for (var i = 0; i < SIZE; i++) {
+                   document.writeln('<div style="display: table-cell; vertical-align: middle;' +
+                           'border: 1px blue solid; background: white;' +
+                           'width: 30px; height: 30px; max-width: 30px; text-align: center;">' +
+                           '<div id="list' + i + '" style="color: #37826C; weight: bold">45</div>' +
+                           '</div>');
+               }
+            </script>
+         </div>
+         <div style="display: table; overflow: hidden; width: 90%; margin: 0 auto;">
+            <script>
+               SIZE = 16;
+               for (var i = 0; i < SIZE; i++) {
+                   document.writeln('<div style="display: table-cell; vertical-align: middle;' +
+                           ' background: white;' +
+                           'width: 30px; height: 10px; max-width: 30px; text-align: center;">' +
+                           '<div id="check' + i + '" style="color: #EB0D1B; weight: bold"></div>' +
+                           '</div>');
+               }
+            </script>
+         </div>
+         <div style="display: table-cell; vertical-align: middle;
+            background: white;
+            width: 30px; height: 45px; max-width: 30px; text-align: center;">
+            <div id="highlight" style="text-align: center;"></div>
+         </div>
+         <div style="text-align: center; margin-top: 1em">
+            <span id="remark" style="background-color: chocolate; color: white; alignment-adjust: central; text-align: center; max-wdith: 800px;">
+            A list is filled with random numbers.
+            </span>
+         </div>
+         <div class="w-100 d-none d-md-block"></div>
+         <div class="col-12 col-sm-12">
+            <h1>Code Sample</h1>
+            <iframe src="https://trinket.io/embed/python/03492e8f3c" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+         </div>
+      </div>
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <h1>Binary Search Algorithm</h1>
+               <p>
+                  Binary Search is a fast searching algorithm that works on the principal of divide and conquer. For a binary search to work, it is very important for the array to be sorted in an ascending order.
+               </p>
+               <h4>Example:</h4>
+               <p> Below is a sorted array and the algorithm will be searching for the number 57.<br>
+                  (9 11 12 20 20 27 28 29 37 40 40 57 74 89 92 99)
+               </p>
+               <h6>First Pass:</h6>
+               <p>The algorithm identifies the first index on the array which is assigned to the variable called low,<br> while the last index on the array is assigned to the variable high .
+                  <br>The variable mid will mark as the middle of the array. To get the mid, we will use the formula mid = (high+low)/2
+                  <br>In this case, low = 0 and high = 15. Using our formula mid = (high + low)/2, (15+0)/2 = 7.5 (The algorithm is going to use the integer value(7), so we are not rounding up to the nearest whole integer.)
+               </p>
+               <h6>Second Pass:</h6>
+               <p>The algorithm checks if the number at the mid index position (29) is equal to the number being searched (57).</p>
+               </p>
+               <h6>Third Pass:</h6>
+               <p>Since the number at the mid index is less than the number being searched for, we then move the variable low to the index position mid+1 ( so index position 8) and we discarded the left hand side of the array.
+                  <br>So we are discarding this part of the array (9 11 12 20 20 27 28 29) <br> and focusing on this part of the array (37 40 40 57 74 89 92 99).
+               </p>
+               <h6>Forth Pass:</h6>
+               <p>So the algorithm repeats the process of finding the mid value by using the formula mid =(high+low)/2. <br> In this case the low variable is assigned to index position mid+1(so index position 8) and the high variable is the last index position. Mid = ( 15 + 8)/ 2 = 11.5 (The algorithm is going to use the integer value(11)). </p>
+               <p>The algorithm checks if the number at the mid index position (57) is equal to the number being searched (57). Now the algorithm has found the number 57.</p>
+               </p>
+            </div>
+         </div>
+      </div>
+      <script src="../Scripts/Searching/binaryScript.js"></script>
+      </div>
+   </body>
+</html>

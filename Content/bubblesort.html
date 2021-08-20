@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Bubble Sort Algorithm Animation</title>
+      <!-- bootstrap Imports Start-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <!-- bootstrap Imports End-->
+      <link href="../styles/main.css" type="text/css" rel="stylesheet">
+      <script>
+         $(document).ready(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+             $('[data-toggle="popover"]').popover();
+         });
+      </script>
+      <script>
+         function showNavbarContent(id) {
+             try {
+                 var sorting = document.getElementById('navSortingAlgorithms');
+                 var specials = document.getElementById('navSpecials');
+
+                 if (sorting.id !== id)
+                     sorting.classList.remove("in");
+                 if (specials.id !== id)
+                     specials.classList.remove("in");
+
+             } catch (error) {
+
+             }
+         }
+      </script>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+         <a class="navbar-brand" href="#">TECKNO ALGORITHIMS</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href="../index.html">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="bubblesort.html">Bubble Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="insertionSort.html">Insertion Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="selectionsort.html">Selection Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="quickSort.html">Quick Sort</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="binarySearch.html">Binary Search</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="linearSearch.html">Linear Search</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="row">
+         <div class="col-12 col-sm-12" style="text-align: center; color:white">
+            <br><br><br>
+            <p id="buttons" class="text-center">
+               <input id="inputField" type="number" onkeydown="if (event.keyCode == 13) add()" min="1" max="99" step="1" value="1" size="10" maxlength="2">
+               <a class="btn btn-primary" role="button" id="add" onclick="add()" class="button2">Add</a>
+               <a class="btn btn-primary" role="button"  id="random" onclick="addRandom()" class="button2" >Add 10 Random Keys</a>
+               <a class="btn btn-primary" role="button"  id="sort" onclick="initSort(); startStopwatch()" class="button2" >Sort</a>
+               <a class="btn btn-primary" role="button"  id="fast" onclick="initFastSort(); startStopwatch()" class="button2 " >Sort 100 Keys Fast</a>
+               <a class="btn btn-primary" role="button" id="fast" data-toggle="modal" data-target=".bd-example-modal-lg" class="button2 ">Explanation</a>
+            </p>
+            <p id="buttons2" class="text-center">
+               <a class="btn btn-primary" role="button" id="pp" onclick="pausePlay(); startStopwatch()"  class="button">Pause/Play</a>
+               <a class="btn btn-primary" role="button" id="stop" onclick="stopButton(); resetStopwatch()" class="button3">Stop</a>
+            </p>
+
+            <div class="mx-auto card dell-blue text-white" id="timer-display" style="width: 14rem; color: black; visibility: hidden">
+               <h1 id="timer"></h1>
+            </div>
+
+            <canvas class="canvas-sorting" id="paint" width="1108" height="500">
+               Your browser does not support the HTML5 canvas tag.
+            </canvas>
+
+         </div>
+         <div class="w-100 d-none d-md-block"></div>
+         <div class="col-12 col-sm-12">
+            <h1>Code Sample</h1>
+            <iframe src="https://trinket.io/embed/python/6c90ec5598" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+         </div>
+      </div>
+      <!-- Large modal -->
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <h1>Bubble Sort Algorithim</h1>
+               <p>
+                  Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
+               </p>
+               <h4>Example:</h4>
+               <h6>First Pass:</h6>
+               <p>( 5 1 4 2 8 ) –> ( 1 5 4 2 8 ), Here, algorithm compares the first two elements, and swaps since 5 > 1.</p>
+               <p>( 1 5 4 2 8 ) –>  ( 1 4 5 2 8 ), Swap since 5 > 4</p>
+               <p>( 1 4 5 2 8 ) –>  ( 1 4 2 5 8 ), Swap since 5 > 2</p>
+               <p>( 1 4 2 5 8 ) –> ( 1 4 2 5 8 ), Now, since these elements are already in order (8 > 5), algorithm does not swap them.</p>
+               <h6>Second Pass:</h6>
+               <p>( 1 4 2 5 8 ) –> ( 1 4 2 5 8 )</p>
+               <p>( 1 4 2 5 8 ) –> ( 1 2 4 5 8 ), Swap since 4 > 2</p>
+               <p>( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )</p>
+               <p>( 1 2 4 5 8 ) –>  ( 1 2 4 5 8 )</p>
+               <p>Now, the array is already sorted, but our algorithm does not know if it is completed. The algorithm needs one whole pass without any swap to know it is sorted.</p>
+               <h6>Third Pass:</h6>
+               <p>( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )</p>
+               <p>( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )</p>
+               <p>( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )</p>
+               <p>( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )</p>
+            </div>
+         </div>
+      </div>
+      <script src="../Scripts/Sorting/bubbleScript.js"></script>
+      <script src="../Scripts/timer.js"></script>
+      </div>
+   </body>
+</html>
